@@ -11,7 +11,7 @@ const Assistant = () => {
   const [currentState, setCurrentState] = useState(INITIAL_STATE);
   const [isTyping, setIsTyping] = useState(false);
   const [ttsEnabled, setTtsEnabled] = useState(false);
-  const chatEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // Initial greeting
   useEffect(() => {
@@ -20,7 +20,12 @@ const Assistant = () => {
 
   useEffect(() => {
     if (history.length > 1 || (isTyping && history.length > 0)) {
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTo({
+          top: chatContainerRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     }
   }, [history, isTyping]);
 
@@ -78,7 +83,7 @@ const Assistant = () => {
 
   return (
     <div className="container" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
-      <div className="glass-panel" style={{ maxWidth: '800px', margin: '0 auto', minHeight: '600px', display: 'flex', flexDirection: 'column' }}>
+      <div className="glass-panel" style={{ maxWidth: '800px', margin: '0 auto', height: '600px', display: 'flex', flexDirection: 'column' }}>
         
         {/* Header */}
         <div style={{ padding: '20px', borderBottom: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -103,7 +108,7 @@ const Assistant = () => {
         </div>
 
         {/* Chat Area */}
-        <div style={{ flex: 1, padding: '24px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div ref={chatContainerRef} style={{ flex: 1, padding: '24px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <AnimatePresence>
             {history.map((msg) => (
               <motion.div 
@@ -182,7 +187,6 @@ const Assistant = () => {
               </div>
             </motion.div>
           )}
-          <div ref={chatEndRef} />
         </div>
       </div>
     </div>
