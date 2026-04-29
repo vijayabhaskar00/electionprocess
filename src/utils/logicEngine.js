@@ -91,6 +91,7 @@ export const chatLogic = {
     options: [
       { label: "Voter ID Laws", nextState: "voter_id" },
       { label: "Volunteer as Poll Worker", nextState: "poll_worker" },
+      { label: "Leave Feedback", nextState: "feedback_prompt" },
       { label: "Main Menu", nextState: "greeting" }
     ]
   },
@@ -105,6 +106,20 @@ export const chatLogic = {
     message: "That's fantastic! Poll workers are essential to democracy. You generally get paid for your time, and it's a great way to serve your community. You can sign up through your county election board.",
     options: [
       { label: "View Key Dates", nextState: "timeline" },
+      { label: "Main Menu", nextState: "greeting" }
+    ]
+  },
+  feedback_prompt: {
+    message: "I hope I was able to help! Would you like to leave any feedback about this assistant?",
+    options: [
+      { label: "Yes, leave feedback", nextState: "leave_feedback" },
+      { label: "No, return to Menu", nextState: "greeting" }
+    ]
+  },
+  leave_feedback: {
+    message: "We appreciate your thoughts! Please enter your feedback below.",
+    component: 'FeedbackForm',
+    options: [
       { label: "Main Menu", nextState: "greeting" }
     ]
   }

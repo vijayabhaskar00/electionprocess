@@ -5,6 +5,7 @@ import { chatLogic, INITIAL_STATE } from '../utils/logicEngine';
 import Timeline from './Timeline';
 import PollingLocator from './PollingLocator';
 import VotingMethods from './VotingMethods';
+import FeedbackForm from './FeedbackForm';
 
 const Assistant = () => {
   const [history, setHistory] = useState([]);
@@ -145,6 +146,9 @@ const Assistant = () => {
                     )}
                     {msg.component === 'VotingMethods' && (
                       <div style={{ marginTop: '10px' }}><VotingMethods /></div>
+                    )}
+                    {msg.component === 'FeedbackForm' && (
+                      <div style={{ marginTop: '10px' }}><FeedbackForm /></div>
                     )}
 
                     {/* Render Options */}
