@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, CheckCircle2 } from 'lucide-react';
+import { Calendar, CheckCircle2, Download } from 'lucide-react';
 
 const events = [
   { date: 'Oct 7', title: 'Voter Registration Deadline', status: 'past' },
@@ -53,6 +53,16 @@ const Timeline = () => {
           </motion.div>
         ))}
       </div>
+
+      <motion.button 
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="btn btn-outline" 
+        style={{ width: '100%', marginTop: '20px', padding: '10px' }}
+        onClick={() => alert("Mock: Event added to your calendar!")}
+      >
+        <Download size={16} /> Add to Calendar
+      </motion.button>
     </div>
   );
 };
