@@ -19,7 +19,9 @@ const Assistant = () => {
   }, []);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (history.length > 1 || (isTyping && history.length > 0)) {
+      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [history, isTyping]);
 
   const speakText = (text) => {
